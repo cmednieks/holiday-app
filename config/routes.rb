@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'holidays#home'
-  post '/' => 'holidays#create'
+  post '/' => 'holidays#index'
 
   get 'holidays/index'
 
