@@ -1,0 +1,17 @@
+<h2>Welcome to the Holiday App</h2>
+<div>
+	<%= form_for :holiday do |f| %>
+	
+		<%= f.label "Pick your country" %>
+		<%= f.select :country, ['BE', 'BG', 'BR', 'CA', 'CZ', 'DE', 'ES', 'FR', 'GB', 'GT', 'HR', 'IT', 'NL', 'NO', 'PL', 'SI', 'SK', 'US'] %>
+		<br>
+		<%= f.label "Date"%>
+		<%= f.date_select :day_of_occurrence %>
+		<br>
+		<%= f.submit "submit" %>
+	
+	<% end %>
+</div>
+		
+	
+		
