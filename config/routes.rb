@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  root 'holidays#home'
-  post '/' => 'holidays#index'
+  resources :days
+
+  root 'days#new'
 
   get 'holidays/index'
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
