@@ -1,5 +1,15 @@
 <h1>Days#show</h1>
-<p>Find me in app/views/days/show.html.erb</p>
 <div>
-	<%= @response %>
+	<% holiday_count = 1 %>
+	<% @list.each do |holidayHash| %>
+	<div>
+	<h3><%= "Holiday #{holiday_count}" %></h3>
+		<% holidayHash.each do |key, info| %>
+			<%= key + ": " + info unless key == "date" %>
+			<%= key + ": " + @day.month + "/" + @day.day_of_month + "/" + @day.year %>
+			<br>
+		<% end %>
+		<% holiday_count+=1 %>
+	</div>
+	<% end %>
 </div>

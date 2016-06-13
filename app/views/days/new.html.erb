@@ -1,5 +1,7 @@
 <div>
 	<%= form_for :day, url: days_path do |f| %>
+		<%= f.label :country %>
+		<%= f.select :country, Country::COUNTRIES %>
 		<br>
 		<%= f.label :year %>
 		<%= f.select :year, Day::YEARS %>
@@ -11,6 +13,6 @@
 		<%= f.select :day_of_month, Day::DAYS %>
 		<br>
 		<%= f.submit "submit" %>
-	
+		<br>
 	<% end %>
 </div>

@@ -20,9 +20,10 @@ ActiveRecord::Schema.define(version: 20160613131221) do
   end
 
   create_table "days", force: :cascade do |t|
-    t.string   "year"
-    t.string   "month"
-    t.string   "day_of_month"
+    t.string   "country"
+    t.integer  "year"
+    t.integer  "month"
+    t.integer  "day_of_month"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
