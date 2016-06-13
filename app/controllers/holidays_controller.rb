@@ -1,6 +1,7 @@
 class HolidaysController < ApplicationController
   
   def home
+    @holidays = Hash.new
   end
   
   def create_date
