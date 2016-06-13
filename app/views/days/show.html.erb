@@ -5,8 +5,7 @@
 	<div>
 	<h3><%= "Holiday #{holiday_count}" %></h3>
 		<% holidayHash.each do |key, info| %>
-			<%= key + ": " + info unless key == "date" %>
-			<%= key + ": " + @day.month + "/" + @day.day_of_month + "/" + @day.year %>
+			<%= key + ": " + info %>
 			<br>
 		<% end %>
 		<% holiday_count+=1 %>
