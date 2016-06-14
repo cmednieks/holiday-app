@@ -1,7 +1,7 @@
 <div>
 	<%= form_for :day, url: days_path do |f| %>
 		<%= f.label :country %>
-		<%= f.select :country, Country::COUNTRIES %>
+		<%= f.select :country, Country::COUNTRIES, :include_blank => true %>
 		<br>
 		<%= f.label :year %>
 		<%= f.select :year, Day::YEARS %>

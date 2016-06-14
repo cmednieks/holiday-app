@@ -31,13 +31,23 @@ class DaysController < ApplicationController
       holidayArray = []
       country_list = Country::COUNTRIES
       count = 0
-      country_list.each do |country|
-        response = HTTParty.get("https://holidayapi.com/v1/holidays?country=#{country}&year=#{day.year}&month=#{day.month}&day=#{day.day_of_month}")
+      if day.country == ''
+        country_list.each do |country|
+          response = HTTParty.get("https://holidayapi.com/v1/holidays?country=#{country}&year=#{day.year}&month=#{day.month}&day=#{day.day_of_month}")
+          array << response.parsed_response["holidays"]
+        end
+        array.each do |innerArray|
+          innerArray.each do |holidayHash|
+            holidayArray << holidayHash
+          end
+        end
+      else
+        response = HTTParty.get("https://holidayapi.com/v1/holidays?country=#{day.country}&year=#{day.year}&month=#{day.month}&day=#{day.day_of_month}")
         array << response.parsed_response["holidays"]
-      end
-      array.each do |innerArray|
-        innerArray.each do |holidayHash|
-          holidayArray << holidayHash
+        array.each do |innerArray|
+          innerArray.each do |holidayHash|
+            holidayArray << holidayHash
+          end
         end
       end
       return holidayArray
