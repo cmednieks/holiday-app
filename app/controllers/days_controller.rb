@@ -11,9 +11,6 @@ class DaysController < ApplicationController
 
   def show
     @day = Day.find(params[:id])
-    @holidays = get_holidays_on_day(@day)
-    #response = HTTParty.get("https://holidayapi.com/v1/holidays?country=US&year=#{@day.year}&month=#{@day.month}&day=#{@day.day_of_month}")
-    #@parsed_resp = response.parsed_response["holidays"]
     @list = get_holidays_on_day(@day)
   end
 

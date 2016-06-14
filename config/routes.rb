@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   resources :days
+  
+  resources :holidays
 
-  root 'days#new'
+  root 'static_pages#home'
 
-  get 'holidays/index'
   
 
   # The priority is based upon order of creation: first created -> highest priority.
