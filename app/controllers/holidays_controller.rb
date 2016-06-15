@@ -17,6 +17,7 @@ class HolidaysController < ApplicationController
   
   def show
     @holiday = Holiday.find(params[:id])
+    @hash_to_display = list_dates_for_holiday(@holiday)
   end
   
   private
@@ -49,6 +50,33 @@ class HolidaysController < ApplicationController
         end
       end
       return holiday_list
+    end
+    
+    def list_dates_for_holiday(holiday)
+      final_date_hash = {}
+      rough_list = []
+      country_list = Country::COUNTRIES
+      country_list.each do |country|
+        response = HTTParty.get("https://holidayapi.com/v1/holidays?country=#{country}&year=#{Date.today.year}")
+        rough_list << response.parsed_response["holidays"]
+      end
+      rough_list.each do |date_hash|
+        date_hash.each do |date, holiday_arr|
+          holiday_arr.each do |holiday_hash|
+            new_arr_key = nil
+            holiday_hash.each do |key, value|
+              if key != "name"
+                if key == "country"
+                  new_arr_key = value
+                else
+                  final_date_hash[new_arr_key] = value
+                end
+              end
+            end
+          end
+        end
+      end
+      return final_date_hash
     end
   
 end
