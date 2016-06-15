@@ -63,14 +63,15 @@ class HolidaysController < ApplicationController
       rough_list.each do |date_hash|
         date_hash.each do |date, holiday_arr|
           holiday_arr.each do |holiday_hash|
-            new_arr_key = nil
+            new_key = nil
             holiday_hash.each do |key, value|
-              if key != "name"
-                if key == "country"
-                  new_arr_key = value
-                else
-                  final_date_hash[new_arr_key] = value
-                end
+              is_holiday = false
+              if key == "name" && key == holiday.name
+                is_holiday = true
+              elsif key == "country" && is_holiday
+                new_key = value
+              elsif key == "date" && is_holiday
+                final_date_hash[new_arr_key] = value
               end
             end
           end
