@@ -4,7 +4,8 @@ class DaysController < ApplicationController
   end
   
   def create
-    @day = Day.new(day_params)
+    @day = Day.new(day_params)   
+    @day.country = Country::COUNTRIES_HASH.key(@day.country) unless @day.country == ''
     @day.save
     redirect_to day_path(id: @day.id)
   end
@@ -26,7 +27,7 @@ class DaysController < ApplicationController
     def get_holidays_on_day(day)
       array = []
       holidayArray = []
-      country_list = Country::COUNTRIES
+      country_list = Country::COUNTRIES_HASH.keys
       count = 0
       if day.country == ''
         country_list.each do |country|

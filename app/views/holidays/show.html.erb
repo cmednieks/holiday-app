@@ -1,5 +1,8 @@
 <h2>List of dates associated with selected holiday</h2>
 <div>
-	<%= @holiday.name %>
-	<%= @hash_to_display %>
+	<h1><%= @holiday.name %></h1>
+	<% @hash_to_display.each do |country, date| %>
+		<%= Country::COUNTRIES_HASH[country] + ": " + date %>
+		<br>
+	<% end %>
 </div>

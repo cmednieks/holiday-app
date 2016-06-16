@@ -5,6 +5,7 @@
 	<div>
 	<h3><%= "Holiday #{holiday_count}" %></h3>
 		<% holidayHash.each do |key, info| %>
+			<% info = Country::COUNTRIES_HASH[info] if key == "country" %>
 			<%= key + ": " + info %>
 			<br>
 		<% end %>
