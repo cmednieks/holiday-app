@@ -40,9 +40,9 @@ class HolidaysController < ApplicationController
             holiday_hash.each do |key, value|
               if key == "name"
                 already_contained = false
-                holiday_list.each do |n|
-                  already_contained = true if value.include?(n)
-                end
+                #holiday_list.each do |n|
+                #  already_contained = true if value.include?(n)
+                #end
                 holiday_list << value unless already_contained
               end
             end
@@ -55,24 +55,23 @@ class HolidaysController < ApplicationController
     def list_dates_for_holiday(holiday)
       final_date_hash = {}
       rough_list = []
+      test_arr = []
       country_list = Country::COUNTRIES
       country_list.each do |country|
         response = HTTParty.get("https://holidayapi.com/v1/holidays?country=#{country}&year=#{Date.today.year}")
         rough_list << response.parsed_response["holidays"]
       end
       rough_list.each do |date_hash|
-        date_hash.each do |date, holiday_arr|
+        date_hash.each do |the_date, holiday_arr|
           holiday_arr.each do |holiday_hash|
-            new_key = nil
-            holiday_hash.each do |key, value|
-              is_holiday = false
-              if key == "name" && key == holiday.name
-                is_holiday = true
-              elsif key == "country" && is_holiday
-                new_key = value
-              elsif key == "date" && is_holiday
-                final_date_hash[new_arr_key] = value
-              end
+            is_holiday = false
+            if holiday_hash["name"] == holiday.name
+              is_holiday = true
+            end
+            if is_holiday
+              new_key = holiday_hash["country"]
+              new_value = holiday_hash["date"]
+              final_date_hash[new_key] = new_value
             end
           end
         end
