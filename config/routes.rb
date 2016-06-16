@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'admin_users/new'
+
+  get 'admin_users/show'
+
+  get 'admin_users/index'
+
   resources :days
   
   resources :holidays

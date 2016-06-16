@@ -1,5 +1,6 @@
 class DaysController < ApplicationController
   def new
+    Day.delete_all
     @day = Day.new
   end
   

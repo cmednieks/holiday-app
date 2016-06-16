@@ -1,6 +1,7 @@
 class HolidaysController < ApplicationController
   
   def new
+    Holiday.delete_all
     @list_of_holidays = get_all_holidays
     @holiday = Holiday.new
   end
