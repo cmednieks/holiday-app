@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616143702) do
+ActiveRecord::Schema.define(version: 20160616191048) do
+
+  create_table "admin_users", force: :cascade do |t|
+    t.string   "username"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "countries", force: :cascade do |t|
     t.string   "name"
