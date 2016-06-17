@@ -59,6 +59,7 @@ class HolidaysController < ApplicationController
       test_arr = []
       country_list = Country::COUNTRIES
       country_list.each do |country|
+        current_year = Date.today.year
         response = HTTParty.get("https://holidayapi.com/v1/holidays?country=#{country}&year=#{Date.today.year}")
         rough_list << response.parsed_response["holidays"]
       end

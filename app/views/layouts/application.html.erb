@@ -13,17 +13,20 @@
 <body>
 	<header class="navbar navbar-fixed-top navbar-inverse">
 	    <div class="container">
-	      <%= link_to "The Holiday App", '#', id: "logo" %>
+	      <%= link_to "The Holiday App", root_path, id: "logo" %>
 	      <nav>
 	        <ul class="nav navbar-nav navbar-right">
 	          <li><%= link_to "Home", root_path %></li>
-	          <li><%= link_to "Login as Admin", '#' %></li>
+	          <li><%= link_to "Log in as Admin", 'login' %></li>
 	        </ul>
 	      </nav>
 		</div>
 	 </header>
 	
 	<div class="container">
+		<% flash.each do |message_type, message| %>
+			<div class="alert alert-<%= message_type %>"><%= message %></div>
+		<% end %>
 		<%= yield %>
 	</div>
 
