@@ -4,13 +4,13 @@
 		<%= f.select :country, Country::COUNTRIES_HASH.values, :include_blank => true %>
 		<br>
 		<%= f.label :year %>
-		<%= f.select :year, Day::YEARS %>
+		<%= f.select :year, Day::YEARS, :selected => Date.today.year %>
 		<br>
 		<%= f.label :month %>
-		<%= f.select :month, Day::MONTHS %>
+		<%= f.select :month, Day::MONTHS, :selected => Date.today.month %>
 		<br>
 		<%= f.label :day_of_month %>
-		<%= f.select :day_of_month, Day::DAYS %>
+		<%= f.select :day_of_month, Day::DAYS, :selected => Date.today.day %>
 		<br>
 		<%= f.submit "submit" %>
 		<br>
