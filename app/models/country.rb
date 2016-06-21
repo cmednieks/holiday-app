@@ -6,5 +6,5 @@ class Country < ActiveRecord::Base
                    'GB' => 'Great Britain', 'GT' => 'Guatemala', 'HR' => 'Croatia', 'IT' => 'Italy',
                    'NL' => 'Netherlands', 'NO' => 'Norway', 'PL' => 'Poland', 'SI' => 'Slovenia', 
                    'SK' => 'Slovakia', 'US' => 'United States' }
-  COUNTRIES = COUNTRIES_HASH.keys
+  COUNTRIES_ABBRV = COUNTRIES_HASH.keys
 end
