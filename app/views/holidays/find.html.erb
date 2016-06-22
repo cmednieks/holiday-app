@@ -1,0 +1,13 @@
+<div>
+	<%= form_for :holiday, url: 'holidays#show' do |f| %>
+		
+		<%= f.label :name %>
+		<%= f.select :name, @holiday_list %>
+		<br>
+		<%= f.label :year %>
+		<%= f.select :year, [Date.today.year..Date.today.year+50] %>
+		<br>
+		<%= f.submit %>
+		
+	<% end %>
+</div>

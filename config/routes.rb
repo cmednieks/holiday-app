@@ -1,19 +1,17 @@
 Rails.application.routes.draw do
 
-  get 'admin_users/new'
-  get 'admin_users/show'
-  get 'admin_users/index'
-
-  resources :days
-  
-  resources :holidays
-
   root 'static_pages#home'
+  
+  get 'find' => 'holidays#find'
+  post 'find' => 'holidays#show'
   
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
 
+  get 'admin_users/new'
+  get 'admin_users/show'
+  get 'admin_users/index'
   
 
   # The priority is based upon order of creation: first created -> highest priority.

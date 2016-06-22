@@ -72,6 +72,30 @@ class Holiday
     new_holiday
   end
   
+  def self.get_all_holidays
+    holidays_array = []
+    final_array = []
+    country_list = COUNTRIES_ABBRV
+    country_list.each do |country|
+      response = HTTParty.get("https://holidayapi.com/v1/holidays?country=#{country}&year=#{Date.today.year}")
+      holidays_array << Holiday.json_parser(response)
+    end
+    holidays_array.each do |inner_arr|
+      inner_arr.each do |holiday_hash|
+        holiday_hash.each do |key, value|
+          if key == "name"
+            already_contained = false
+            holidays_array.each do |n|
+              already_contained = true if value == n
+            end
+            final_array << value unless already_contained
+          end
+        end
+      end
+    end
+    return final_array
+  end
+  
   def multi_day_holiday? 
     return @dates.length > 1
   end
