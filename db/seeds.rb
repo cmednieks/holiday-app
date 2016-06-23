@@ -7,13 +7,10 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 curr_date = Date.today
-while curr_date.year < Date.today.year + 51
+while curr_date.year < Date.today.year + 52
   CalendarDate.create(day: curr_date)
   curr_date += 1
 end
-
-
-__END__
 
 COUNTRIES_HASH = { 'BE' => 'Belgium', 'BG' => 'Bulgaria', 'BR' => 'Brazil', 'CA' => 'Canada',
                  'CZ' => 'Czech Republic', 'DE' => 'Germany', 'ES' => 'Spain', 'FR' => 'France',
@@ -35,32 +32,20 @@ rough_array.each do |dateHash|
   dateHash.each do |date_key, array_value|
     array_value.each do |holiday_hash|
       already_contained = false
-      array_of_holiday_instances.each do |saved_holiday| if array_of_holiday_instances.length > 0
-        if holiday_hash["name"] == saved_holiday[:name] 
+      array_of_holiday_instances.each do |saved_holiday|
+        if holiday_hash["name"] == saved_holiday.name && holiday_hash["country"] == saved_holiday.country
           already_contained = true
-          holi = saved_holiday
         end
-        if already_contained
-          holi.day << holiday_hash["date"]
-          country_already_contained = false
-          holi.countries.each do |country|
-            if holiday_hash["country"] == country
-              country_already_contained = true
-            end
-          end
-          holi.countries << holiday_hash["country"] unless country_already_contained
-          holi.save
-        end
-        alread_contained = false
       end
-      if already_contained == false
-        date_arr = holiday_hash["date"].split('-')
-        new_holiday = Holiday.new
-        new_holiday.name = holiday_hash["name"]
-        new_holiday.day << Date.new(date_arr[0].to_i, date_arr[1].to_i, date_arr[2].to_i)
-        new_holiday.countries << holiday_hash["country"]
-        new_holiday.save
-        array_of_holiday_instances << new_holiday
+      if already_contained
+        existing_h = Holiday.where(name: holiday_hash["name"], country: holiday_hash["country"])
+        d = Date.new(holiday_hash["date"])
+        existing_h.occurrences.create(calendar_date_id: CalendarDate.where(day: d).id)
+      else
+        new_h = Holiday.create(name: holiday_hash["name"], country: holiday_hash["country"])
+        d = Date.new(holiday_hash["date"])
+        new_h.occurrences.create(calendar_date_id: CalendarDate.where(day: d).id)
+        array_of_holiday_instances << new_h
       end
     end
   end
