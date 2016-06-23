@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @calendar_date.day %>
+</p>
+
+<%= link_to 'Edit', edit_calendar_date_path(@calendar_date) %> |
+<%= link_to 'Back', calendar_dates_path %>

@@ -11,13 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160621133305) do
+ActiveRecord::Schema.define(version: 20160622192224) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "username"
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "calendar_dates", force: :cascade do |t|
+    t.date     "day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "countries", force: :cascade do |t|
@@ -37,10 +43,19 @@ ActiveRecord::Schema.define(version: 20160621133305) do
 
   create_table "holidays", force: :cascade do |t|
     t.string   "name"
+    t.text     "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date     "date"
-    t.string   "countries"
   end
+
+  create_table "occurrences", force: :cascade do |t|
+    t.integer  "holiday_id"
+    t.integer  "calendar_date_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "occurrences", ["calendar_date_id"], name: "index_occurrences_on_calendar_date_id"
+  add_index "occurrences", ["holiday_id"], name: "index_occurrences_on_holiday_id"
 
 end

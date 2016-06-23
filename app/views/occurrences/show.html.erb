@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Holiday:</strong>
+  <%= @occurrence.holiday %>
+</p>
+
+<p>
+  <strong>Calendar date:</strong>
+  <%= @occurrence.calendar_date %>
+</p>
+
+<%= link_to 'Edit', edit_occurrence_path(@occurrence) %> |
+<%= link_to 'Back', occurrences_path %>

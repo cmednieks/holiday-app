@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :occurrences
+  resources :calendar_dates
   root 'static_pages#home'
   
   get 'find' => 'holidays#find'
