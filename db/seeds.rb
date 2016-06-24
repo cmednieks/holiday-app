@@ -6,9 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+CalendarDate.delete_all
 curr_date = Date.today
-while curr_date.year < Date.today.year + 52
-  CalendarDate.create(day: curr_date)
+while curr_date.year < Date.today.year + 5
+  CalendarDate.where(day: curr_date).first_or_create
   curr_date += 1
 end
 
@@ -21,7 +22,7 @@ COUNTRIES_HASH = { 'BE' => 'Belgium', 'BG' => 'Bulgaria', 'BR' => 'Brazil', 'CA'
 rough_array = []                 
 COUNTRIES_HASH.each do |key, value|
   year_count = Date.today.year 
-  while year_count < Date.today.year + 51
+  while year_count < Date.today.year + 5
     resp = HTTParty.get("https://holidayapi.com/v1/holidays?country=#{key}&year=#{year_count}")
     rough_array << resp.parsed_response["holidays"]
     year_count+=1
@@ -38,13 +39,13 @@ rough_array.each do |dateHash|
         end
       end
       if already_contained
-        existing_h = Holiday.where(name: holiday_hash["name"], country: holiday_hash["country"])
-        d = Date.new(holiday_hash["date"])
-        existing_h.occurrences.create(calendar_date_id: CalendarDate.where(day: d).id)
+        existing_h = Holiday.find_by(name: holiday_hash["name"], country: holiday_hash["country"])
+        d = Date.new(holiday_hash["date"].to_i)
+        existing_h.occurrences.create(calendar_date: CalendarDate.find_by(day: d))
       else
         new_h = Holiday.create(name: holiday_hash["name"], country: holiday_hash["country"])
-        d = Date.new(holiday_hash["date"])
-        new_h.occurrences.create(calendar_date_id: CalendarDate.where(day: d).id)
+        d = Date.new(holiday_hash["date"].to_i)
+        new_h.occurrences.create(calendar_date: CalendarDate.find_by(day: d))
         array_of_holiday_instances << new_h
       end
     end
