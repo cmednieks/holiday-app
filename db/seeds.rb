@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Holiday.delete_all
 CalendarDate.delete_all
 curr_date = Date.today
 while curr_date.year < Date.today.year + 5
@@ -33,19 +34,21 @@ rough_array.each do |dateHash|
   dateHash.each do |date_key, array_value|
     array_value.each do |holiday_hash|
       already_contained = false
-      array_of_holiday_instances.each do |saved_holiday|
-        if holiday_hash["name"] == saved_holiday.name && holiday_hash["country"] == saved_holiday.country
-          already_contained = true
-        end
+      if Holiday.where(name: holiday_hash["name"], country: holiday_hash["country"]).length > 0
+        already_contained = true
       end
       if already_contained
         existing_h = Holiday.find_by(name: holiday_hash["name"], country: holiday_hash["country"])
-        d = Date.new(holiday_hash["date"].to_i)
-        existing_h.occurrences.create(calendar_date: CalendarDate.find_by(day: d))
+        d = holiday_hash["date"]
+        d_arr = d.split('-')
+        date = Date.new(d_arr[0].to_i, d_arr[1].to_i, d_arr[2].to_i)
+        existing_h.occurrences.create(calendar_date: CalendarDate.find_by(day: date))
       else
         new_h = Holiday.create(name: holiday_hash["name"], country: holiday_hash["country"])
-        d = Date.new(holiday_hash["date"].to_i)
-        new_h.occurrences.create(calendar_date: CalendarDate.find_by(day: d))
+        d = holiday_hash["date"]
+        d_arr = d.split('-')
+        date = Date.new(d_arr[0].to_i, d_arr[1].to_i, d_arr[2].to_i)
+        new_h.occurrences.create(calendar_date: CalendarDate.find_by(day: date))
         array_of_holiday_instances << new_h
       end
     end
