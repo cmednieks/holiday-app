@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160623175944) do
+ActiveRecord::Schema.define(version: 20160624153613) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "username"
@@ -27,12 +27,6 @@ ActiveRecord::Schema.define(version: 20160623175944) do
   end
 
   add_index "calendar_dates", ["day"], name: "index_calendar_dates_on_day", unique: true
-
-  create_table "countries", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "days", force: :cascade do |t|
     t.string   "country"
