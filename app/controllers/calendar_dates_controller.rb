@@ -10,6 +10,11 @@ class CalendarDatesController < ApplicationController
   # GET /calendar_dates/1
   # GET /calendar_dates/1.json
   def show
+    @list_of_holidays = []
+    occs = @calendar_date.occurrences
+    occs.each do |occ|
+      @list_of_holidays << occ.holiday
+    end
   end
 
   # GET /calendar_dates/new
@@ -18,8 +23,8 @@ class CalendarDatesController < ApplicationController
   end
 
   # GET /calendar_dates/1/edit
-  def edit
-  end
+  #def edit
+  #end
 
   # POST /calendar_dates
   # POST /calendar_dates.json
@@ -39,27 +44,27 @@ class CalendarDatesController < ApplicationController
 
   # PATCH/PUT /calendar_dates/1
   # PATCH/PUT /calendar_dates/1.json
-  def update
-    respond_to do |format|
-      if @calendar_date.update(calendar_date_params)
-        format.html { redirect_to @calendar_date, notice: 'Calendar date was successfully updated.' }
-        format.json { render :show, status: :ok, location: @calendar_date }
-      else
-        format.html { render :edit }
-        format.json { render json: @calendar_date.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #def update
+  #  respond_to do |format|
+  #    if @calendar_date.update(calendar_date_params)
+  #      format.html { redirect_to @calendar_date, notice: 'Calendar date was successfully updated.' }
+  #      format.json { render :show, status: :ok, location: @calendar_date }
+  #    else
+  #      format.html { render :edit }
+  #      format.json { render json: @calendar_date.errors, status: :unprocessable_entity }
+  #    end
+  #  end
+  #end
 
   # DELETE /calendar_dates/1
   # DELETE /calendar_dates/1.json
-  def destroy
-    @calendar_date.destroy
-    respond_to do |format|
-      format.html { redirect_to calendar_dates_url, notice: 'Calendar date was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  #def destroy
+  #  @calendar_date.destroy
+  #  respond_to do |format|
+  #    format.html { redirect_to calendar_dates_url, notice: 'Calendar date was successfully destroyed.' }
+  #    format.json { head :no_content }
+  #  end
+  #end
 
   private
     # Use callbacks to share common setup or constraints between actions.

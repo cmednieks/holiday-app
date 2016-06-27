@@ -1,4 +1,5 @@
 class AdminUsersController < ApplicationController
+  
   def new
   end
 
@@ -7,4 +8,5 @@ class AdminUsersController < ApplicationController
 
   def index
   end
+  
 end

@@ -8,7 +8,7 @@
 
 Holiday.delete_all
 CalendarDate.delete_all
-curr_date = Date.today
+curr_date = Date.new(Date.today.year, 1, 1)
 while curr_date.year < Date.today.year + 5
   CalendarDate.where(day: curr_date).first_or_create
   curr_date += 1

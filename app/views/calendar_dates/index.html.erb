@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Calendar Dates</h1>
+<h1>Calendar Dates</h1>
 
 <table>
+	<col width="130">
   <thead>
     <tr>
       <th>Day</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -14,14 +15,10 @@
     <% @calendar_dates.each do |calendar_date| %>
       <tr>
         <td><%= calendar_date.day %></td>
-        <td><%= link_to 'Show', calendar_date %></td>
-        <td><%= link_to 'Edit', edit_calendar_date_path(calendar_date) %></td>
-        <td><%= link_to 'Destroy', calendar_date, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show Holidays', calendar_date %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Calendar date', new_calendar_date_path %>

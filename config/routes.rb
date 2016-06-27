@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   resources :occurrences
   resources :calendar_dates
+  
   resources :holidays
+  get 'calendar_date/show_form'  
   root 'static_pages#home'
   
   get 'find' => 'holidays#find'
