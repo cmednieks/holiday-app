@@ -27,4 +27,8 @@ module SessionsHelper
     end
   end
   
+  def sysadmin?
+    current_user.sysadmin == true
+  end
+  
 end
