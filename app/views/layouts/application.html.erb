@@ -17,6 +17,8 @@
 	      <nav>
 	        <ul class="nav navbar-nav navbar-right">
 	          <li><%= link_to "Home", root_path %></li>
+			  <li><%= link_to "Find a Holiday", holidays_path %></li>
+			  <li><%= link_to "Find a day", calendar_dates_path %></li>
 			  <% if logged_in? %>
 			  	<li><%= link_to "Log out", 'logout', method: "delete" %></li>
 			  <% else %>

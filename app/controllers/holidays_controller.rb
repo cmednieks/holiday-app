@@ -6,12 +6,13 @@ class HolidaysController < ApplicationController
   # GET /holidays.json
   def index
     @holidays = Holiday.where(nil)
-    @holidays = Holiday.where(country: params[:country]) if params[:country].present?
+    @holidays = Holiday.where(country: Holiday::COUNTRIES_HASH[params[:country]]) if params[:country].present?
   end
 
   # GET /holidays/1
   # GET /holidays/1.json
   def show
+    @holiday = Holiday.find(params[:id])
     @occs = @holiday.occurrences
   end
 
@@ -70,9 +71,6 @@ class HolidaysController < ApplicationController
       @holiday = Holiday.find(params[:id])
     end
     
-    def find_by_country
-      @holidays = Holiday.where(params[:country])
-    end
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def holiday_params

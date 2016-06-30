@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Calendar Dates</h1>
+<h1>Calendar Dates containing Holidays</h1>
 
 <table>
 	<col width="130">
@@ -14,9 +14,11 @@
   <tbody>
     <% @calendar_dates.each do |calendar_date| %>
       <tr>
+	  <% unless calendar_date.occurrences.first.nil? %>
         <td><%= calendar_date.day %></td>
         <td><%= link_to 'Show Holidays', calendar_date %></td>
       </tr>
+	  <% end %>
     <% end %>
   </tbody>
 </table>

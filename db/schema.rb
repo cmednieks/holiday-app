@@ -11,14 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160627161352) do
+ActiveRecord::Schema.define(version: 20160630123848) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "username"
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.boolean  "sysadmin"
   end
 
   create_table "calendar_dates", force: :cascade do |t|

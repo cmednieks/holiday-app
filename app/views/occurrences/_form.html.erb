@@ -1,4 +1,4 @@
-<%= form_for(@occurrence) do |f| %>
+<%= form_for([@holiday, @occurrence]) do |f| %>
   <% if @occurrence.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@occurrence.errors.count, "error") %> prohibited this occurrence from being saved:</h2>
@@ -12,12 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :holiday_id %><br>
-    <%= f.text_field :holiday_id %>
+    <%= f.hidden_field :holiday_id, :value => @holiday.id %><br>
   </div>
   <div class="field">
-    <%= f.label :calendar_date_id %><br>
-    <%= f.text_field :calendar_date_id %>
+	<% @day_options = CalendarDate.pluck(:day) %>
+	<% @ids = CalendarDate.pluck(:id) %>
+    <%= f.label "New occurrence date" %><br>
+    <%= f.collection_select(:calendar_date_id, CalendarDate.all, :id, :day) %>
   </div>
   <div class="actions">
     <%= f.submit %>

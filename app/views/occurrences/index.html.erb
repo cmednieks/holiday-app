@@ -1,12 +1,12 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>Listing Occurrences</h1>
+<h3><small><%= link_to 'New Occurrence', new_holiday_occurrence_path %></small></h3>
 
-<table>
+<table class="table-striped">
   <thead>
     <tr>
-      <th>Holiday</th>
-      <th>Calendar date</th>
+      <th>Upcoming dates</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,16 +14,13 @@
   <tbody>
     <% @occurrences.each do |occurrence| %>
       <tr>
-        <td><%= occurrence.holiday %></td>
-        <td><%= occurrence.calendar_date %></td>
-        <td><%= link_to 'Show', occurrence %></td>
-        <td><%= link_to 'Edit', edit_occurrence_path(occurrence) %></td>
-        <td><%= link_to 'Destroy', occurrence, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= occurrence.calendar_date.day %></td>
+        <td><%= link_to 'Destroy', holiday_occurrence_path(occurrence.holiday.id, occurrence.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
 
-<%= link_to 'New Occurrence', new_occurrence_path %>
+

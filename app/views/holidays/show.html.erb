@@ -9,20 +9,12 @@
   <strong>Country:</strong>
   <%= @holiday.country %>
 </p>
-<p>
-	<strong>List of future dates:</strong>
-	<br>
-	<ul>
-	<% @occs.each do |occurrence| %>
-		<li>
-			<%= occurrence.calendar_date.day %> |
-			<%= link_to 'Delete occurrence', Occurrences.find_by(day: occurrence.calendar_date.day), method: :delete, data: { confirm: 'Are you sure?' } %>
-		</li>
-		<br>
-	<% end %>
-	</ul>
-</p>
 
-<%= link_to 'Destroy', @holiday, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Edit', edit_holiday_path(@holiday) %> |
+<%#= link_to 'Create new occurrence', new_occurrence_path if logged_in? %> | 
+<%= link_to 'View upcoming dates for this holiday', holiday_occurrences_path(@holiday) %>
+<%= link_to 'Destroy', @holiday, method: :delete, data: { confirm: 'Are you sure?' } if logged_in? %> |
+<%= link_to 'Edit', edit_holiday_path(@holiday) if logged_in? %> |
 <%= link_to 'Back', holidays_path %>
+	 
+	
+

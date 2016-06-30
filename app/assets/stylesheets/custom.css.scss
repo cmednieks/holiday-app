@@ -11,6 +11,14 @@ body {
   text-align: center;
 }
 
+td {
+	width: 100px;
+}
+
+#name {
+	width: 400px;
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -53,6 +61,6 @@ p {
 }
 
 #logo:hover {
-  color: green;
+  color: blue;
   text-decoration: none;
 }

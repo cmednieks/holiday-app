@@ -11,7 +11,7 @@
 	<br>
 	<ul>
 		<% @list_of_holidays.each do |holiday| %>
-			<li><%=  holiday.name + ": " + Holiday::COUNTRIES_HASH[holiday.country] %></li>
+			<li><%=  holiday.name + ": " + holiday.country %></li>
 			<br>
 		<% end %>
 	</ul>

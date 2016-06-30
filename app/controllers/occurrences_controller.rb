@@ -1,10 +1,12 @@
 class OccurrencesController < ApplicationController
   before_action :set_occurrence, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_admin_user, only: [:edit, :update, :destroy]
 
   # GET /occurrences
   # GET /occurrences.json
   def index
-    @occurrences = Occurrence.all
+    @holiday = Holiday.find(params[:holiday_id])
+    @occurrences = @holiday.occurrences
   end
 
   # GET /occurrences/1
@@ -14,21 +16,19 @@ class OccurrencesController < ApplicationController
 
   # GET /occurrences/new
   def new
-    @occurrence = Occurrence.new
-  end
-
-  # GET /occurrences/1/edit
-  def edit
+    @holiday = Holiday.find(params[:holiday_id])
+    @occurrence = @holiday.occurrences.build
   end
 
   # POST /occurrences
   # POST /occurrences.json
   def create
+    @holiday = Holiday.find(params[:holiday_id])
     @occurrence = Occurrence.new(occurrence_params)
 
     respond_to do |format|
       if @occurrence.save
-        format.html { redirect_to @occurrence, notice: 'Occurrence was successfully created.' }
+        format.html { redirect_to :back, notice: 'Occurrence was successfully created.' }
         format.json { render :show, status: :created, location: @occurrence }
       else
         format.html { render :new }
@@ -37,26 +37,13 @@ class OccurrencesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /occurrences/1
-  # PATCH/PUT /occurrences/1.json
-  def update
-    respond_to do |format|
-      if @occurrence.update(occurrence_params)
-        format.html { redirect_to @occurrence, notice: 'Occurrence was successfully updated.' }
-        format.json { render :show, status: :ok, location: @occurrence }
-      else
-        format.html { render :edit }
-        format.json { render json: @occurrence.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # DELETE /occurrences/1
   # DELETE /occurrences/1.json
   def destroy
     @occurrence.destroy
     respond_to do |format|
-      format.html { redirect_to occurrences_url, notice: 'Occurrence was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Occurrence was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
-
-  resources :occurrences
+  
   resources :calendar_dates
-  
-  resources :holidays
-  get 'calendar_date/show_form'  
+  resources :holidays do 
+    resources :occurrences do 
+    end
+  end
+    
   root 'static_pages#home'
+  get 'bulk_import' => 'static_pages#bulk_import'
   
-  get 'find' => 'holidays#find'
-  post 'find' => 'holidays#show'
   
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'

@@ -1,5 +1,5 @@
 <h1>New Occurrence</h1>
 
-<%= render 'form' %>
+<%= render 'form', :holiday => @holiday, :occurrence => @occurrence %>
 
-<%= link_to 'Back', occurrences_path %>
+<%= link_to 'Back', holiday_occurrences_path %>
