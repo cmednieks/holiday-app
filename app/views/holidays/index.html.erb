@@ -30,7 +30,7 @@
       	<tr>
         	<td id="name"><%= holiday.name %></td>
         	<td><%= holiday.country %></td>
-        	<td><%= link_to 'Show dates', holiday %></td>
+        	<td><%= link_to 'Show dates', holiday_occurrences_path(holiday.id) %></td>
         	<td><%= link_to 'Edit', edit_holiday_path(holiday) if logged_in? %></td>
         	<td><%= link_to 'Destroy', holiday, method: :delete, data: { confirm: 'Are you sure?' } if logged_in? %></td>
       	</tr>
