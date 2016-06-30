@@ -11,6 +11,8 @@ require 'timeout'
 Holiday.delete_all
 CalendarDate.delete_all
 Occurrence.delete_all
+AdminUser.delete_all
+AdminUser.create(username: "the_admin", password: "CatsCats1", password_confirmation: "CatsCats1")
 curr_date = Date.new(Date.today.year, 1, 1)
 while curr_date.year <= Date.today.year + 5
   CalendarDate.where(day: curr_date).first_or_create
