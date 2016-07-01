@@ -15,7 +15,7 @@
     <% @calendar_dates.each do |calendar_date| %>
       <tr>
 	  <% unless calendar_date.occurrences.first.nil? %>
-        <td><%= calendar_date.day %></td>
+        <td><%= calendar_date.day.strftime("%a, %-d %b, %Y") %></td>
         <td><%= link_to 'Show Holidays', calendar_date %></td>
       </tr>
 	  <% end %>

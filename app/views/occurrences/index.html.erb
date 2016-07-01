@@ -14,7 +14,7 @@
   <tbody>
     <% @occurrences.each do |occurrence| %>
       <tr>
-        <td><%= occurrence.calendar_date.day %></td>
+        <td><%= occurrence.calendar_date.day.strftime("%a, %-d %b, %Y") %></td>
         <td><%= link_to 'Destroy', holiday_occurrence_path(occurrence.holiday.id, occurrence.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -22,5 +22,3 @@
 </table>
 </div>
 <br>
-
-

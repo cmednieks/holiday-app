@@ -12,7 +12,8 @@ Holiday.delete_all
 CalendarDate.delete_all
 Occurrence.delete_all
 AdminUser.delete_all
-AdminUser.create(username: "the_admin", password: "CatsCats1", password_confirmation: "CatsCats1")
+
+AdminUser.create(username: "the_admin", password: "foobar", password_confirmation: "foobar")
 curr_date = Date.new(Date.today.year, 1, 1)
 while curr_date.year <= Date.today.year + 5
   CalendarDate.where(day: curr_date).first_or_create
@@ -35,23 +36,17 @@ COUNTRIES_HASH.each do |key, value|
       year_count += 1
   end
 end
-array_of_holiday_instances = []
 rough_array.each do |dateHash|
   dateHash.each do |date_key, array_value|
     array_value.each do |holiday_hash|
       if Holiday.where(name: holiday_hash["name"], country: COUNTRIES_HASH[holiday_hash["country"]]).any?
         existing_h = Holiday.find_by(name: holiday_hash["name"], country: COUNTRIES_HASH[holiday_hash["country"]])
         d = holiday_hash["date"].to_date
-        #d_arr = d.split('-')
-        #date = Date.new(d_arr[0].to_i, d_arr[1].to_i, d_arr[2].to_i)
         existing_h.occurrences.create(calendar_date: CalendarDate.find_by(day: d))
       else
         new_h = Holiday.create(name: holiday_hash["name"], country: COUNTRIES_HASH[holiday_hash["country"]])
-        d = holiday_hash["date"]
-        d_arr = d.split('-')
-        date = Date.new(d_arr[0].to_i, d_arr[1].to_i, d_arr[2].to_i)
-        new_h.occurrences.create(calendar_date: CalendarDate.find_by(day: date))
-        array_of_holiday_instances << new_h
+        d = holiday_hash["date"].to_date
+        new_h.occurrences.create(calendar_date: CalendarDate.find_by(day: d))
       end
     end
   end
