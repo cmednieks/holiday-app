@@ -8,9 +8,9 @@ require 'timeout'
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Occurrence.destroy_all
 Holiday.destroy_all
 CalendarDate.destroy_all
-Occurrence.destroy_all
 AdminUser.destroy_all
 
 AdminUser.create(username: "the_admin", password: "foobar", password_confirmation: "foobar")
