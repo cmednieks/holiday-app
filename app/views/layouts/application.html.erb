@@ -20,6 +20,7 @@
 			  <li><%= link_to "Pick a Holiday", holidays_path %></li>
 			  <li><%= link_to "Pick a day", calendar_dates_path %></li>
 			  <% if logged_in? %>
+			  	<li><%= link_to 'New Holiday', new_holiday_path %></li>
 			  	<li><%= link_to "Log out", logout_path, method: "delete" %></li>
 			  <% else %>
 	          	<li><%= link_to "Log in as Admin", login_path %></li>
