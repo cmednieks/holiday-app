@@ -16,6 +16,7 @@ class OccurrencesController < ApplicationController
 
   # GET /occurrences/new
   def new
+    
     @holiday = Holiday.find(params[:holiday_id])
     @occurrence = @holiday.occurrences.build
   end

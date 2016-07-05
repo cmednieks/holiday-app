@@ -1,6 +1,6 @@
 class HolidaysController < ApplicationController
   before_action :set_holiday, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_admin_user, only: [:edit, :update, :destroy]
+  before_action :logged_in_admin_user, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /holidays
   # GET /holidays.json
@@ -23,6 +23,7 @@ class HolidaysController < ApplicationController
 
   # GET /holidays/1/edit
   def edit
+    
   end
 
   # POST /holidays
