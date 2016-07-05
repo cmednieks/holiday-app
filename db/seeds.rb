@@ -8,10 +8,10 @@ require 'timeout'
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Holiday.delete_all
-CalendarDate.delete_all
-Occurrence.delete_all
-AdminUser.delete_all
+Holiday.destroy_all
+CalendarDate.destroy_all
+Occurrence.destroy_all
+AdminUser.destroy_all
 
 AdminUser.create(username: "the_admin", password: "foobar", password_confirmation: "foobar")
 curr_date = Date.new(Date.today.year, 1, 1)
